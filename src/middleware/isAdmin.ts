@@ -7,7 +7,12 @@ export async function isAdmin(req:Request, res:Response, next:NextFunction){
     const {id} = req.body;
     
     const isAdmin:User[] = await new  UserService().isAdmin(callerId);
-    if(isAdmin.length === 0) next()
+    if(isAdmin.length === 0 ){
+        return res.send({
+            message:'Usuário invalido'
+        })
+    }
+
     if(isAdmin[0].permissao === "USER"){
         return res.send({
             message:"Você não tem Permissão de admin"

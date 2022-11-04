@@ -24,8 +24,7 @@ class UserService {
 
     async isAdmin(id: string): Promise<User[] | any> {
         try {
-            const isadmin = await UserModel.find({ id: id });
-            
+            const isadmin = await UserModel.find({id: id});
             return isadmin
         } catch (error) {
             console.log(error);
