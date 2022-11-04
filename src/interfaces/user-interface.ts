@@ -1,7 +1,5 @@
-export interface User{
-    id: Number,
+export interface Empresa{
     nome: string,
     empresa: string,
-    permissao: string,
-    
+    permissao: string, 
 }

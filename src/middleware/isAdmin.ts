@@ -1,29 +1,15 @@
-import {Request, Response, NextFunction } from "express";
-import { User } from "../interfaces/user-interface";
+import { Request, Response, NextFunction } from "express";
 import { UserService } from "../services/Userservice";
 
-export async function isAdmin(req:Request, res:Response, next:NextFunction){
-    const {callerId}  =  req.params;
-    const {id} = req.body;
+export async function isAdmin(req: Request, res: Response, next: NextFunction) {
+    const {id} = req.params
+    const isAdmin:any = await new  UserService().isAdmin(id);
     
-    const isAdmin:User[] = await new  UserService().isAdmin(callerId);
-    if(isAdmin.length === 0 ){
-        return res.send({
-            message:'Usuário invalido'
-        })
-    }
-
-    if(isAdmin[0].permissao === "USER"){
-        return res.send({
-            message:"Você não tem Permissão de admin"
+    if (isAdmin.lenght !== 0 && isAdmin[0].permissao === "USER") {
+        return res.json({
+            message: "Você não tem Permissão de admin"
         });
+    } else {
+        next()
     }
-
-    if(id === parseInt(callerId)){
-        return res.send({
-            message:"Usuário ja está cadstrado"
-        });
-    }
-    
-    next()
 }
