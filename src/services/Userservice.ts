@@ -5,6 +5,7 @@ class UserService {
     async listAll(): Promise<Empresa[] | undefined> {
         try {
             const users = await prisma.empresa.findMany();
+            await prisma.$disconnect()
             return users;
         } catch (error) {
             console.log(error);
@@ -32,15 +33,15 @@ class UserService {
 
     async updateUser(id: string, empresa: Empresa) {
         try {
-           return await prisma.empresa.update({
-            where:{
-              id:id  
-            },
-            data:{
-                ...empresa
-            }
-           })
-           
+            return await prisma.empresa.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    ...empresa
+                }
+            })
+
         } catch (error) {
             console.log(error);
         }
