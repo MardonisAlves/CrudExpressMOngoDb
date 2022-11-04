@@ -2,35 +2,36 @@ import { User } from "../interfaces/user-interface";
 import { UserModel } from "../model/UserModel";
 
 class UserService {
-    async listAll():Promise<User[] | undefined> {
+    async listAll(): Promise<User[] | undefined> {
         try {
             const users = await UserModel.find();
-            return  users;
+            return users;
         } catch (error) {
             console.log(error);
-            
+
         }
     }
 
-    async createUser(users:User){
+    async createUser(users: User) {
         try {
             const create = await UserModel.create(users)
             await create.save()
         } catch (erro) {
-          console.log(erro);
-            
+            console.log(erro);
+
         }
     }
 
-    async isAdmin(id:string): Promise<User[] | any>{
+    async isAdmin(id: string): Promise<User[] | any> {
         try {
-         const isadmin = await UserModel.find({id:id});
-        return isadmin
+            const isadmin = await UserModel.find({ id: id });
+            
+            return isadmin
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
     }
 }
 
 
-export {UserService}
+export { UserService }

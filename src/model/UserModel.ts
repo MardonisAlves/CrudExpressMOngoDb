@@ -1,14 +1,21 @@
-import {Schema, model} from 'mongoose';
+import mongoose ,{Schema, model} from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment'
 import { User } from '../interfaces/user-interface';
-import { ConnectToMongoDb } from '../config/db';
-// create schema with interface User
-ConnectToMongoDb();
+import {url} from '../config/db'
+
+let connection =  mongoose.createConnection(url);
+autoIncrement.initialize(connection);
+
 
 const userSchema = new Schema<User>({
-    id: { type:Number, required:true },
     empresa:{ type:String , required: true},
     nome: { type:String, required: true },
     permissao:{ type: String, required:true}
+})
+
+userSchema.plugin(autoIncrement.plugin, {
+    model:'User',
+    field:'id'
 })
 
 

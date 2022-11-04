@@ -3,11 +3,9 @@ import * as dotenv from "dotenv";
 dotenv.config()
 const url:string = process.env?.URL_MONGODB || "";
 
-export async function ConnectToMongoDb(){
- await mongoose.connect(url);
-}
+const connect = async () => await mongoose.connect(url)
 
-
+export  {url , connect}
 
 
 
