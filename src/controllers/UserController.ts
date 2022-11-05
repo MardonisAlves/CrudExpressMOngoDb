@@ -16,6 +16,7 @@ class  UserController{
 
     async create(req:Request, res:Response):Promise<any>{
       const empresa = req.body as Empresa
+    
       try {
         const create =  await new UserService().createUser(empresa);
         return res.json(create)

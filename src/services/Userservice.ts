@@ -62,7 +62,7 @@ class UserService {
 
     async isAdmin(id: string): Promise<Empresa | any> {
         try {
-            return await prisma.empresa.findMany({
+            const empresa = await prisma.empresa.findMany({
                 where: {
                     id: id
                 },
@@ -70,6 +70,13 @@ class UserService {
                     permissao: true
                 }
             });
+            if(empresa.length === 0){
+                return [
+                    {permissao:0}
+                ]
+            }else{
+                return empresa
+            }
         } catch (error) {
             console.log(error);
         }
