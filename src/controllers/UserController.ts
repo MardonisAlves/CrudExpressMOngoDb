@@ -6,11 +6,10 @@ class  UserController{
 
      async listAll(req:Request, res:Response):Promise<any>{
         try {
-          const users =  await new UserService().listAll();
+          const users =  await new UserService().listAll();         
           return res.json(users)
         } catch (error) {
-            console.log(error);
-            
+            return []
         }
     }
 
@@ -21,7 +20,7 @@ class  UserController{
         const create =  await new UserService().createUser(empresa);
         return res.json(create)
       } catch (error) {
-         console.log(error);
+        return []
       }
   }
 
@@ -33,7 +32,7 @@ class  UserController{
       const updateUser = await new UserService().updateUser(id, empresa)
       return res.json(updateUser)
     } catch (error) {
-     console.log(error);
+     return []
       
     }
   }
@@ -44,7 +43,7 @@ class  UserController{
     const deleteUser = await new UserService().deleteUser(id);
     return res.json(deleteUser)
     } catch (error) {
-      console.log(error);
+      return []
     }
   }
 

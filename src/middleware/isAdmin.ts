@@ -9,7 +9,7 @@ export async function isAdmin(req: Request, res: Response, next: NextFunction) {
         next()
     }else if(req.method === "DELETE"){
         const isAdmin:any = await new  UserService().isAdmin(id);
-        if (isAdmin[0].permissao === 0 || isAdmin[0].permissao === "USER") {
+        if (isAdmin.length === 0) {
             return res.status(HttpStatus.UNAUTHORIZED).send({
                 menssage:"Você não tem permissao"
             })

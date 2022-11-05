@@ -2,66 +2,91 @@ import { Empresa } from "../interfaces/user-interface";
 import prisma from "../prisma";
 
 class UserService {
+
     async listAll(): Promise<Empresa[] | undefined> {
         try {
             const users = await prisma.empresa.findMany();
-            await prisma.$disconnect()
+            if(users.length === 0) throw new Error("");
             return users;
-        } catch (error) {
-            console.log(error);
+        } catch (error:any) {
+            return []
         }
     }
 
-    async createUser(empresa: Empresa) {
+    async createUser(empresa: Empresa): Promise<Empresa[] | undefined | never[]> {
         try {
-            return await prisma.empresa.create({
+            if(empresa.empresa === "" || empresa.empresa === undefined)  throw new Error("");
+
+            const users:any  =  prisma.empresa.create({
                 data: {
                     empresa: empresa.empresa,
                     nome: empresa.nome,
                     permissao: empresa.permissao
                 },
                 select: {
-                    empresa: true
+                    empresa: true,
+                    id:true,
+                    nome:true,
+                    permissao:true
                 }
             })
-
+            return users
         } catch (erro) {
-            console.log(erro);
-
+           return [];
         }
     }
 
-    async updateUser(id: string, empresa: Empresa) {
+    async updateUser(id: string, empresa: Empresa) :Promise<Empresa | never[] | undefined>{
         try {
-            return await prisma.empresa.update({
+            const users = await prisma.empresa.update({
                 where: {
                     id: id
                 },
                 data: {
                     ...empresa
+                },
+                select:{
+                    empresa:true,
+                    id:true,
+                    nome:true,
+                    permissao:true
                 }
             })
+           if(users.id === undefined) throw new Error("");
+           return users
 
         } catch (error) {
-            console.log(error);
+            return []
         }
     }
 
-    async deleteUser(id: string) {
+    async deleteUser(id: string):Promise<Empresa | never[] | undefined> {
         try {
-            return await prisma.empresa.delete({
+            if(id === "") throw new Error("");
+            
+            const users = await prisma.empresa.delete({
                 where: {
                     id: id
+                },
+                select:{
+                    empresa:true,
+                    id:true,
+                    nome:true,
+                    permissao:true
                 }
             });
-
+            if(!users.id) throw new Error("");
+            
+            return users;
         } catch (error) {
-            console.log(error);
+            return []
         }
     }
 
     async isAdmin(id: string): Promise<Empresa | any> {
         try {
+            if(id === "")  throw new Error("");
+            
             const empresa = await prisma.empresa.findMany({
                 where: {
                     id: id
@@ -71,14 +96,11 @@ class UserService {
                 }
             });
             if(empresa.length === 0){
-                return [
-                    {permissao:0}
-                ]
-            }else{
-                return empresa
+                throw new Error("Error");
             }
+            return empresa
         } catch (error) {
-            console.log(error);
+            return []
         }
     }
 }

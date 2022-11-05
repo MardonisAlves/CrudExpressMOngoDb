@@ -5,7 +5,8 @@
   "main": "server.ts",
   "scripts": {
     "dev": "ts-node-dev --transpile-only src/server.ts",
-    "test": "jest  --coverage  --forceExit"
+    "test:unit": "jest  jest -i __test__/unit/unit.test.ts -t --detectOpenHandles",
+    "test:integration": "jest --forceExit jest -i __test__/integration/integration.test.ts -t"
   },
   "author": "Mardonis Alves B <mardonis.bezerra@gmail.com>",
   "license": "MIT",
