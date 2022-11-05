@@ -4,6 +4,8 @@
   "description": "'Api crud test'",
   "main": "server.ts",
   "scripts": {
+    "start": "node ./dist/src/server.js",
+    "build": "rimraf dist && tsc",
     "dev": "ts-node-dev --transpile-only src/server.ts",
     "test:unit": "jest  jest -i __test__/unit/unit.test.ts -t --detectOpenHandles",
     "test:integration": "jest --forceExit jest -i __test__/integration/integration.test.ts -t"
@@ -40,6 +42,7 @@
     "jest-cli": "^29.2.2",
     "nodemon": "^2.0.20",
     "prisma": "^4.5.0",
+    "rimraf": "^3.0.2",
     "superagent": "^8.0.3",
     "supertest": "^6.3.1",
     "testdouble": "^3.16.6",

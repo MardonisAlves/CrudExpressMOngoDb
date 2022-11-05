@@ -8,6 +8,6 @@ app.use(express.urlencoded({extended:false}))
 app.use(cors())
 app.use(router)
 
-app.listen(3000);
+app.listen(3000, () => { console.log('O Server está online') });
 
 export default app
