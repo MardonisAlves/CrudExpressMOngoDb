@@ -1,8 +1,7 @@
 node_modules
 .env
 yarn.lock
-test
 coverage
-dist
+__dist__
 *.yml
 
