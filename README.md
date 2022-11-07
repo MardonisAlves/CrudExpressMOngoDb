@@ -33,10 +33,10 @@ yarn run test:integration  or npm run test:integration
 
 ## Routes
 
-- [ Create object ](http://localhost:3000/users) - POST.
-- [ Get all objects ](http://localhost:3000/users) - GET .
-- [ Update object ](http://localhost:3000/users/id) PACTH.
-- [ Delete object ](http://localhost:3000/users/id) - DELETE.
+- [ http://localhost:3000/users ](http://localhost:3000/users) - POST.
+- [http://localhost:3000/users](http://localhost:3000/users) - GET .
+- [ http://localhost:3000/users/id ](http://localhost:3000/users/id) PACTH.
+- [ http://localhost:3000/users/id ](http://localhost:3000/users/id) - DELETE.
 
 
 

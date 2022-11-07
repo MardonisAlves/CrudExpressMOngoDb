@@ -4,4 +4,5 @@ yarn.lock
 coverage
 dist
 *.yml
+__test__
 
